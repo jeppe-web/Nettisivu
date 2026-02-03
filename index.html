@@ -54,11 +54,13 @@
             color: white;
         }
 
+        /* 🏃‍♂️ Smooth evasive NO button */
         #no {
             background: #cccccc;
             position: absolute;
             left: 200px;
             top: 0;
+            transition: transform 0.2s ease-out;
         }
 
         .hidden {
@@ -147,14 +149,31 @@
     const questionBox = document.getElementById("questionBox");
     const loveBox = document.getElementById("loveBox");
     const valentineBox = document.getElementById("valentineBox");
+    const buttonsBox = document.querySelector(".buttons");
 
-    noButton.addEventListener("mouseover", () => {
-        const box = document.querySelector(".buttons");
-        const maxX = box.clientWidth - noButton.offsetWidth;
-        const maxY = box.clientHeight - noButton.offsetHeight;
+    /* 🐭 Smooth mouse-avoidance logic */
+    buttonsBox.addEventListener("mousemove", (e) => {
+        const buttonRect = noButton.getBoundingClientRect();
 
-        noButton.style.left = Math.random() * maxX + "px";
-        noButton.style.top = Math.random() * maxY + "px";
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const centerX = buttonRect.left + buttonRect.width / 2;
+        const centerY = buttonRect.top + buttonRect.height / 2;
+
+        const dx = centerX - mouseX;
+        const dy = centerY - mouseY;
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const minDistance = 80;
+
+        if (distance < minDistance) {
+            const angle = Math.atan2(dy, dx);
+            const moveX = Math.cos(angle) * 14;
+            const moveY = Math.sin(angle) * 14;
+
+            noButton.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }
     });
 
     yesButton.addEventListener("click", () => {
