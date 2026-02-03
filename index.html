@@ -54,13 +54,11 @@
             color: white;
         }
 
-        /* 🏃‍♂️ Smooth evasive NO button */
         #no {
             background: #cccccc;
             position: absolute;
             left: 200px;
             top: 0;
-            transition: transform 0.2s ease-out;
         }
 
         .hidden {
@@ -136,9 +134,9 @@
         Esimerkki aikataulu 👩‍❤️‍💋‍👨<br>
         15:00 (8:00) – Aamu- ja iltapäiväkahvit yhdessä (ja kullan aamupala) <br>
         15:30 (8:30) – Tehdään meidän reissukuvista tilattava kirja ja tilataan SE!! <br>
-        17:00 (10:00) – Pelataan jotain (esim. kuvan-arvauspeli, UNO...) tai mennään yhteiselle kävelylle 🚶‍♀️‍➡️🚶‍♂️‍➡️ <br>
-        19:00 (12:00) – Tehdään yhdessä hyvää ruokea, esimerkiksi piffiä tai pastaa ja vähän viiniä... 🍝 <br>
-        21:00 (14:00) – Valitaan yhessä leffa, voidaan miettiä pari ehdotusta etukäteen ❤️ <br><br>
+        17:00 (10:00) – Pelataan jotain tai mennään yhteiselle kävelylle 🚶‍♀️‍➡️🚶‍♂️‍➡️ <br>
+        19:00 (12:00) – Tehdään yhdessä ruokaa, jotain tosi hyvää 🍝 <br>
+        21:00 (14:00) – Yhdessä valittu elokuva kullan kanssa ❤️ <br><br>
         &lt;3 &lt;3 &lt;3 &lt;3 &lt;3
     </div>
 </div>
@@ -149,31 +147,14 @@
     const questionBox = document.getElementById("questionBox");
     const loveBox = document.getElementById("loveBox");
     const valentineBox = document.getElementById("valentineBox");
-    const buttonsBox = document.querySelector(".buttons");
 
-    /* 🐭 Smooth mouse-avoidance logic */
-    buttonsBox.addEventListener("mousemove", (e) => {
-        const buttonRect = noButton.getBoundingClientRect();
+    noButton.addEventListener("mouseover", () => {
+        const box = document.querySelector(".buttons");
+        const maxX = box.clientWidth - noButton.offsetWidth;
+        const maxY = box.clientHeight - noButton.offsetHeight;
 
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-
-        const centerX = buttonRect.left + buttonRect.width / 2;
-        const centerY = buttonRect.top + buttonRect.height / 2;
-
-        const dx = centerX - mouseX;
-        const dy = centerY - mouseY;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const minDistance = 80;
-
-        if (distance < minDistance) {
-            const angle = Math.atan2(dy, dx);
-            const moveX = Math.cos(angle) * 14;
-            const moveY = Math.sin(angle) * 14;
-
-            noButton.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        }
+        noButton.style.left = Math.random() * maxX + "px";
+        noButton.style.top = Math.random() * maxY + "px";
     });
 
     yesButton.addEventListener("click", () => {
