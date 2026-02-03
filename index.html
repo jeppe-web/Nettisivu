@@ -70,10 +70,45 @@
             color: #b30059;
             line-height: 1.6;
         }
+
+        /* 💕 Love screen animations */
+        .fade-text {
+            font-size: 28px;
+            color: #b30059;
+            animation: fadeInOut 2.5s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            25% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .love-box {
+            background: linear-gradient(135deg, #ffc1d9, #ff9ebc);
+            animation: softGlow 3.5s ease-in-out infinite;
+        }
+
+        @keyframes softGlow {
+            0% {
+                box-shadow: 0 10px 25px rgba(179, 0, 89, 0.25);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 15px 35px rgba(179, 0, 89, 0.45);
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 10px 25px rgba(179, 0, 89, 0.25);
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body>
 
+<!-- 💌 Question screen -->
 <div class="box" id="questionBox">
     <img src="photo.jpg" alt="Me ❤️ You">
     <h2>Will you be my valentine? &lt;3</h2>
@@ -84,25 +119,33 @@
     </div>
 </div>
 
+<!-- 💖 Love animation screen -->
+<div class="box hidden love-box" id="loveBox">
+    <div class="fade-text">
+        Rakastan sua &lt;3
+    </div>
+</div>
+
+<!-- 💘 Timetable screen -->
 <div class="box hidden" id="valentineBox">
     <h2>Kultalaisten ystävänpäivä ❤️</h2>
     <div class="hearts">
         &lt;3 &lt;3 &lt;3 &lt;3 &lt;3<br><br>
-        Esimerkki aikataulu 👩‍❤️‍💋‍👨
+        Esimerkki aikataulu 👩‍❤️‍💋‍👨<br>
         15:00 (8:00) – Aamu- ja iltapäiväkahvit yhdessä (ja kullan aamupala) <br>
-        15:30 (8:30) – Tehdään meidän reissukuvista tilattava kirja (esim iFolor) ja tilataan SE!! <br>
-        17:00 (10:00) – Pelataan jotain, (sananarvauspeli, UNO...), tai mennään yhteiselle kävelylle 🚶‍♀️‍➡️🚶‍♂️‍➡️ <br>
-        19:00 (12:00) – Tehdään yhdessä ruokaa, keksitään joku tosi hyvä!! Esim pihvi tai  hyvä pasta ja viini... 🍝 <br>
+        15:30 (8:30) – Tehdään meidän reissukuvista tilattava kirja ja tilataan SE!! <br>
+        17:00 (10:00) – Pelataan jotain tai mennään yhteiselle kävelylle 🚶‍♀️‍➡️🚶‍♂️‍➡️ <br>
+        19:00 (12:00) – Tehdään yhdessä ruokaa, jotain tosi hyvää 🍝 <br>
         21:00 (14:00) – Yhdessä valittu elokuva kullan kanssa ❤️ <br><br>
         &lt;3 &lt;3 &lt;3 &lt;3 &lt;3
     </div>
 </div>
 
-
 <script>
     const noButton = document.getElementById("no");
     const yesButton = document.getElementById("yes");
     const questionBox = document.getElementById("questionBox");
+    const loveBox = document.getElementById("loveBox");
     const valentineBox = document.getElementById("valentineBox");
 
     noButton.addEventListener("mouseover", () => {
@@ -116,7 +159,12 @@
 
     yesButton.addEventListener("click", () => {
         questionBox.classList.add("hidden");
-        valentineBox.classList.remove("hidden");
+        loveBox.classList.remove("hidden");
+
+        setTimeout(() => {
+            loveBox.classList.add("hidden");
+            valentineBox.classList.remove("hidden");
+        }, 3500);
     });
 </script>
 
