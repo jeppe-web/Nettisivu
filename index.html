@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine 💕</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #ffe6f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .box {
+            background: #ffb6c1;
+            width: 350px;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .box img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin: 10px 0 20px;
+            color: #b30059;
+        }
+
+        .buttons {
+            position: relative;
+            height: 80px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background: #ff4d88;
+            color: white;
+        }
+
+        #no {
+            background: #cccccc;
+            position: absolute;
+            left: 200px;
+            top: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .hearts {
+            font-size: 18px;
+            color: #b30059;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box" id="questionBox">
+    <img src="photo.jpg" alt="Me ❤️ You">
+    <h2>Voiko kulta olla mun valentine? &lt;3</h2>
+
+    <div class="buttons">
+        <button id="yes">Joo</button>
+        <button id="no">Ei</button>
+    </div>
+</div>
+
+<div class="box hidden" id="valentineBox">
+    <h2>Valentine’s Day 💘</h2>
+    <div class="hearts">
+        &lt;3 &lt;3 &lt;3 &lt;3 &lt;3<br><br>
+        10:00 – Aamukahvit yhdessä ☕<br>
+        13:00 – Kävely & naurua 💕<br>
+        18:00 – Illallinen 🍝<br>
+        22:00 – Elokuva & halit 🎬<br><br>
+        &lt;3 &lt;3 &lt;3 &lt;3 &lt;3
+    </div>
+</div>
+
+<script>
+    const noButton = document.getElementById("no");
+    const yesButton = document.getElementById("yes");
+    const questionBox = document.getElementById("questionBox");
+    const valentineBox = document.getElementById("valentineBox");
+
+    noButton.addEventListener("mouseover", () => {
+        const box = document.querySelector(".buttons");
+        const maxX = box.clientWidth - noButton.offsetWidth;
+        const maxY = box.clientHeight - noButton.offsetHeight;
+
+        noButton.style.left = Math.random() * maxX + "px";
+        noButton.style.top = Math.random() * maxY + "px";
+    });
+
+    yesButton.addEventListener("click", () => {
+        questionBox.classList.add("hidden");
+        valentineBox.classList.remove("hidden");
+    });
+</script>
+
+</body>
+</html>
